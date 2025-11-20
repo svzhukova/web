@@ -1,0 +1,92 @@
+/* Abonements.css */
+
+/* Общий фон для всей страницы */
+.abonements-page {
+    background-color: #f3ebdd; /* тот же бежевый, что и в секции */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Контент после видео */
+  .abonements-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center;
+    color: #4b3b2a;
+    line-height: 1.6;
+  }
+  
+  .rules-section {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 40px auto;
+    max-width: 1050px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  .rules-image {
+    flex: 1;
+  }
+  
+  .rules-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .rules-content {
+    flex: 1.2;
+    padding: 20px 45px;
+  }
+  
+  .rules-content h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #222;
+  }
+  
+  .rule-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    line-height: 1.6;
+  }
+  
+  .rule-number {
+    background-color: #f1e4c7;
+    color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 15px;
+    flex-shrink: 0;
+    line-height: 1; /* 👈 чтобы цифра не сдвигалась */
+  }
+  
+  
+  .rule-item p {
+    color: #444;
+  }
+  
+  .rule-item a {
+    color: #e4c36a;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .rule-item a:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,1045 @@
+/* Общие стили */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Основной контейнер */
+#root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Главный контент */
+main {
+  flex: 1;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+.main-header {
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Навигация - делаем flex контейнер */
+.main-header nav {
+  display: flex;
+  justify-content: space-between; /* Лого слева, навигация занимает оставшееся пространство */
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.home-page main {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+/* Логотип слева */
+.logo {
+  font-size: 1.8rem;
+  color: #6a0dad;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+
+/* Навигационный список - центрируем */
+.main-header nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 25px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+nav ul li {
+  margin: 0;
+}
+
+nav ul li a {
+  color: #6a0dad;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+nav ul li a:hover {
+  color: #8a2be2;
+  background-color: rgba(106, 13, 173, 0.1);
+  transform: translateY(-2px);
+}
+
+.header-title {
+  order: 1; /* Размещаем после навигации */
+  margin-top: 5px; /* Небольшой отступ сверху */
+  font-size: 1.5rem; /* Можно настроить размер */
+  color: #6a0dad; /* Цвет как у ссылок */
+  font-weight: bold;
+}
+/* Видео секция */
+
+.video-section {
+  position: relative;
+  width: 100vw; /* 100% ширины viewport */
+  margin-left: calc(-50vw + 50%); /* Центрирование для полной ширины */
+  height: 70vh;
+  margin-top: 60px;
+  overflow: hidden;
+}
+
+.video-section video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.studio-title {
+  font-family: 'Playfair Display', serif !important;
+  font-size: 4rem !important;
+  font-weight: 200 !important; /* Обычная толщина */
+  font-style: italic !important;
+  color: #fff !important;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Стили для приветственной секции под видео */
+.welcome-section {
+  text-align: center;
+  padding: 20px 20px 40px 20px; /* Уменьшили верхний отступ с 60px до 20px */
+  background-color: #fff;
+  margin-top: 0; /* Убираем лишний margin сверху */
+}
+
+.welcome-section h1 {
+  font-family: Arial, sans-serif;
+  font-size: 2.9rem;
+  color: #333;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.pretty-font {
+  font-family: 'Playfair Display', serif;
+  color: #333;
+  font-size: 3.1rem;
+  font-weight: 600;
+}
+
+.welcome-full-text {
+  font-family: Arial, sans-serif;
+  font-size: 2.2rem;
+  color: #333;
+  font-weight: 400;
+  margin: 0;
+}
+
+.video-section video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Если видео не загрузилось, показываем градиент */
+.video-section:has(video[poster]) {
+  background: none;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  text-align: center;
+}
+
+.video-text {
+  color: #fff;
+  z-index: 10;
+  font-size: 3rem;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  padding: 0 20px;
+}
+
+/* Заголовок */
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.pretty-font {
+  font-family: 'Playfair Display', serif;
+  color: #333;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  0% {
+    opacity: 0; /* Начальное состояние - прозрачный */
+  }
+  100% {
+    opacity: 1; /* Конечное состояние - полностью видимый */
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1.5s ease-in;
+}
+
+/* Кнопки */
+.auth-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.auth-buttons button {
+  background-color: #882df7;
+  color: white;
+  border: none;
+  padding: 9px 19px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auth-buttons button:hover {
+  background-color: #6e23c9;
+}
+
+/* Нижний колонтитул */
+footer {
+  width: 100vw; /* 100% от ширины viewport */
+  margin-left: calc(-50vw + 50%); /* Центрирование для полной ширины */
+  background-color: #f0f0f0;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 0;
+  box-sizing: border-box;
+  position: relative;
+  left: 0;
+}
+
+.contact-info {
+  margin: 20px 0;
+}
+
+.contact-info p {
+  margin: 5px 0;
+}
+
+.social-media a {
+  color: #6a0dad;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+  color: #8a2be2;
+  text-decoration: underline;
+}
+
+/* Таблица */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 12px;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Формы */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+.home-images-section {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: #f6eedf;
+  padding: 0px 0;
+  margin-top: 0px;
+}
+
+.intro-section {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+
+  background-color: #bbabe2;
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin-top: 90px;
+}
+
+.intro-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.intro-text {
+  position: relative;
+  top: -35px; /* можно регулировать — например -15px */
+}
+
+/* 2. Поднимаем отдельно сам заголовок чуть больше */
+.intro-text h2 {
+  position: relative;
+  top: -60px; /* этот поднимается чуть сильнее */
+}
+
+.intro-image img {
+  width: 400px;
+  height: auto;
+
+}
+
+.intro-text {
+  flex: 1;
+  text-align: left;
+}
+
+.intro-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.intro-text p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+.intro-button {
+  background-color: #ffffff;
+  color: rgb(134, 96, 202);
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.intro-button:hover {
+  background-color: #ffffff;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+  .intro-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .intro-image img {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .intro-text {
+    text-align: center;
+  }
+}
+
+/* Контейнер для центрирования контента */
+.home-images-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Секции */
+section {
+  margin-bottom: 40px;
+}
+
+section h2 {
+  color: #333;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+/* Стили для секции "О нас" с картинками */
+.about-section {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 60px 0;
+}
+
+.images-grid {
+  position: relative;
+  width: 100vw; /* 100% ширины viewport */
+  margin-left: calc(-50vw + 50%); /* Центрирование для полной ширины */
+  padding: -10px 0;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center; /* Центрируем содержимое */
+}
+.images-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* уменьшает расстояние между рядами (вертикальное) */
+}
+/* Контейнер для картинок внутри */
+.images-grid-content {
+  max-width: 1200px;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.images-grid-content img {
+  width: 100%;
+  height: auto;
+  display: block; /* Убирает лишние отступы у img */
+}
+
+
+.images-row {
+  display: flex;
+  justify-content: center;
+  gap: 35px; /* уменьшает горизонтальные отступы между картинками */
+}
+
+.image-item {
+  margin: 15px;
+  text-align: center;
+  max-width: 300px;
+}
+
+.image-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.image-item img:hover {
+  transform: scale(1.05);
+}
+
+.image-item p {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Стили для секции "О нас" */
+/* Стили для секции "О нас" с картинками */
+.about-section {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-content {
+  position: relative;
+  width: 90vw;
+  margin-left: calc(-45vw + 50%);
+  padding: 60px 0;
+}
+
+.about-block {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+/* Первый и третий блоки: картинка слева, текст справа */
+.about-block {
+  flex-direction: row; /* По умолчанию картинка слева, текст справа */
+}
+
+/* Второй блок: текст слева, картинка справа */
+.about-block.reverse {
+  flex-direction: row-reverse;
+}
+
+.about-text {
+  flex: 1;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.about-image {
+  flex: 0 0 300px; /* Стандартный размер для 1 и 3 картинок */
+  text-align: center;
+}
+
+.about-block.image-right .about-image {
+  flex: 0 0 350px; /* Больший размер для второй картинки */
+}
+
+.about-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.regular-font {
+  font-family: Arial, sans-serif;
+}
+
+.about-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; /* Было 1.4rem - уменьшили размер */
+  font-style: italic;
+  color: #555;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border-left: 4px solid #6a0dad;
+  line-height: 1.5;
+}
+
+.playfair-font {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+
+.about-text .playfair-font {
+  font-weight: 600;
+  color: #6a0dad;
+  font-style: italic;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .about-block.image-left {
+    flex-direction: row;
+  }
+  
+  .about-block.image-right {
+    flex-direction: row-reverse;
+  }
+  
+  .about-image {
+    flex: none;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+/* Стили для секции регистрации с кнопкой */
+.register-section {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.register-section p {
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.register-button {
+  background-color: #882df7;
+  color: #ffffff;
+  border: 2px solid #882df7;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.register-button:hover {
+  background-color: #6b21b9;
+}
+
+/* Стили для формы входа */
+#account form button[type="submit"] {
+  background-color: #882df7;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+#account form button[type="submit"]:hover {
+  background-color: #6b21b9;
+}
+
+
+/* Стили для всех кнопок отправки форм */
+form button[type="submit"] {
+  background-color: #9246e3;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+form button[type="submit"]:hover {
+  background-color: #6b21b9;
+}
+
+
+.main-header .logo .studio-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(110, 0, 194);
+  text-decoration: none;
+  font-style: italic;
+  letter-spacing: 1.5px;
+}
+
+.main-header .logo {
+  margin-right: 40px;
+  padding-left: 20px;
+  padding-top: 0px;
+}
+/* Секция с изображениями направлений на всю ширину */
+
+#about-images {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 30px 0 60px 0 !important;
+  padding-bottom: 80px !important;
+  margin-top: 60px !important;
+  background-color: #e9e0d1;
+  min-height: calc(100vh - 200px);
+  margin-bottom: 0 !important;
+}
+
+.about-images-container {
+  min-height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  padding-top: 80px !important;
+}
+.about-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+#about-images {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 30px 0 100px 0 !important; /* Увеличиваем нижний паддинг */
+  margin-top: 60px !important;
+  background-color: #e9e0d1;
+  min-height: 100vh; /* Вся высота экрана */
+  margin-bottom: -50px !important; /* Компенсируем отступы */
+}
+
+/* Принудительно растягиваем до футера */
+body, #root, main {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Убираем отступы у следующих элементов после секции */
+#about-images + * {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+.about-page-wrapper #about-images {
+  flex-grow: 1; /* Растягивается на все доступное пространство */
+}
+#about-images h2 {
+  text-align: center;
+  margin-bottom: 40px !important;
+  color: #333;
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.image-card {
+  text-align: center;
+}
+
+.image-card img {
+  width: 100%;
+  max-width: 280px;
+  height: 280px; /* Квадратные пропорции */
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.image-card img:hover {
+  transform: scale(1.05); /* Увеличиваем при наведении */
+}
+.image-card p {
+  margin-top: 15px;
+  font-size: 1.1em;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Кнопки авторизации в шапке */
+.main-header .auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  right: 60px;
+  top: 10%;
+  transform: translateY(-50%);
+}
+
+/* Уменьшенные кнопки */
+.main-header .auth-buttons.small button {
+  background-color: #882df7;
+  color: #fff;
+  border: none;
+  padding: px 14px; /* меньше, чем внизу */
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.main-header .auth-buttons.small button:hover {
+  background-color: #6e23c9;
+}
+
+.home-images-section .image-item a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.home-images-section .image-item a:hover img {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(82, 81, 83, 0.3);
+}
+
+.section-description {
+  background: #f8f9fa;
+  padding: 40px;
+  margin: 50px 0;
+  border-radius: 15px;
+  border: 1px solid #e0e0e0;
+}
+
+.section-description h2 {
+  color: #2c5530;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.section-description p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.home-images-section .image-item a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.home-images-section .image-item a:hover img {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(90, 90, 90, 0.3);
+}
+
+
+/* СТИЛИ ДЛЯ СТРАНИЦЫ "О НАС" - ИДЕНТИЧНО ГЛАВНОЙ */
+
+.about-directions-title {
+  text-align: left;
+  margin-bottom: 30px;
+  padding-left: 20px;
+}
+
+.about-images-section {
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.about-images-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Делаем идентично главной странице */
+.about-images-section .images-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-images-section .images-row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.about-images-section .image-item {
+  margin: 30px;
+  text-align: center;
+}
+
+.about-images-section .image-item img {
+  max-width: 270px;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-images-section .image-item img:hover {
+  box-shadow: 0 8px 25px rgba(82, 82, 82, 0.4);
+}
+
+.about-images-section .image-item p {
+  margin-top: 15px;
+  font-size: 1.1em;
+  color: #000000; /* ЧЕРНЫЙ ЦВЕТ */
+  font-weight: 500;
+}
+
+.about-images-section .image-item a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.about-images-section .image-item a:hover p {
+  color: #000000; /* ОСТАЕТСЯ ЧЕРНЫМ ПРИ НАВЕДЕНИИ */
+  font-weight: 500;
+}
+
+/* Принудительно черный цвет для всех текстов под картинками */
+.about-images-section .image-item p,
+.about-images-section .image-item a,
+.about-images-section .image-item a p {
+  color: #000000 !important;
+}
+
+
+/* Фон чуть выше, но не громоздкий */
+.home-images-section {
+  background-color: #f2e5d4;
+  padding: 100px 0; /* немного меньше, чем раньше */
+}
+
+/* Контейнер немного шире, но в меру */
+.home-images-container {
+  max-width: 1000px; /* было 1300 */
+}
+
+/* Оптимальный размер картинок */
+.about-images-section .image-item img,
+.home-images-section .image-item img {
+  max-width: 250px !important; /* было 310px — чуть меньше */
+  height: 260px !important;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-images-section .image-item img:hover,
+.home-images-section .image-item img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Подписи под картинками — немного изящнее */
+.about-images-section .image-item p,
+.home-images-section .image-item p {
+  font-size: 1.1rem !important;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+/* Уменьшаем только центральные картинки (2 и 3) */
+.home-images-section .images-row:first-child .image-item:nth-child(2) img,
+.home-images-section .images-row:nth-child(2) .image-item:nth-child(1) img {
+  max-width: 210px !important;
+  height: 190px !important;
+  opacity: 0.95;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* При наведении оставляем ту же анимацию */
+.home-images-section .images-row:first-child .image-item:nth-child(2) img:hover,
+.home-images-section .images-row:nth-child(2) .image-item:nth-child(1) img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.home-images-section {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: #efebde;
+  padding: 0px 0;
+  min-height: calc(100vh - 200px); /* гарантирует, что фон дойдет до футера */
+  display: flex;
+  align-items: center;
+}
+
+.home-images-container {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.about-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+/* Секция с картинками теперь растягивается и заполняет всё пространство до футера */
+.about-page-wrapper .home-images-section {
+  flex-grow: 1;
+  background-color: #ebe5d8;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* Сбрасываем любые лишние отступы */
+.about-page-wrapper footer,
+footer {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Увеличиваем отступ между блоками */
+.about-page-wrapper h2 {
+  margin-top: 100px; /* было меньше — теперь немного больше */
+}
+
+/* Можно также добавить нижний отступ к предыдущей секции */
+.about-page-wrapper .section-section {
+  margin-bottom: 60px; /* создаёт “воздух” перед заголовком */
+}
+

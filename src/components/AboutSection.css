@@ -1,0 +1,278 @@
+/* src/components/AboutSection.css */
+
+/* Стили для секции "О нас" */
+.about-us {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+
+.about-container {
+    display: flex;
+    flex-direction: column;
+    border: 0.8px solid #882df7; /* ← Меняем с 3px на 1px */
+    background: linear-gradient(135deg, #f8f7ff 0%, #f0edf5 100%);
+    overflow: hidden;
+}
+
+/* ОБЩИЕ СТИЛИ ДЛЯ ВСЕХ КАРТОЧЕК */
+.about-card {
+    border: 0.8px solid #882df7; /* ← Меняем с 1.5px на 1px */
+    background: white;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Границы между карточками */
+.top-row .about-card:not(:last-child),
+.bottom-row .about-card:not(:last-child) {
+    border-right: 0.8px solid #882df7; /* ← Меняем с 1.5px на 1px */
+}
+
+.title-card {
+    background: white !important;
+    border: 0.8px solid #4b1c97; /* ← Меняем с 1.5px на 1px */
+    box-shadow: none !important;
+}
+
+/* Ряды */
+.top-row, .bottom-row {
+    display: grid;
+    height: 250px;
+}
+
+.top-row {
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+.bottom-row {
+    grid-template-columns: 1.5fr 0.5fr 2fr;
+}
+
+/* ОБЩИЕ СТИЛИ ДЛЯ ВСЕХ КАРТОЧЕК */
+.about-card {
+    border: 0.8px solid #882df7;
+    background: white;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Границы между карточками */
+.top-row .about-card:not(:last-child),
+.bottom-row .about-card:not(:last-child) {
+    border-right: 0.8px solid #882df7;
+}
+
+/* Убираем правые границы у последних карточек */
+.top-row .about-card:nth-child(3) {
+    border-right: none;
+}
+
+.bottom-row .about-card:nth-child(3) {
+    border-right: none;
+}
+
+/* Убираем нижнюю границу у верхнего ряда */
+.top-row .about-card {
+    border-bottom: none;
+}
+
+.about-card:hover {
+    border-color: #882df7;
+    z-index: 1;
+}
+
+/* Стили для карточки с заголовком */
+.title-card {
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.studio-title {
+    color: #451394 !important; /* Добавляем !important */
+    font-size: 2.2em;
+    font-weight: 300;
+    text-align: center;
+    margin: 0;
+    letter-spacing: 1.5px;
+    text-shadow: none;
+}
+
+/* Стили для текстовой карточки */
+.text-card {
+    padding: 9px 11px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left !important; /* Текст по левому краю */
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.main-text {
+    color: #53149b;
+    font-size: 1.0em !important;
+    font-weight: 700;
+    margin-bottom: 6px !important;
+    line-height: 1.2 !important;
+    text-align: left !important; /* Текст по левому краю */
+}
+
+.description {
+    color: #8B5FBF;
+    font-size: 0.9em !important;
+    line-height: 1.3 !important;
+    margin-bottom: 9px !important;
+    overflow: hidden;
+    text-align: left !important; /* Текст по левому краю */
+}
+
+.cta-button {
+    display: block;
+    width: 100%;
+    max-width: 140px !important;
+    margin: 0 auto !important; /* Кнопка остается по центру */
+    padding: 4px 8px !important;
+    background: linear-gradient(135deg, #882df7 0%, #882df7 100%);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.75em !important;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+/* Стили для кнопки */
+
+.cta-button:hover {
+    background: linear-gradient(135deg, #5519b6 0%, #5519b6 100%);
+}
+
+/* Стили для изображений */
+.card-image {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 1024px) {
+    .top-row, .bottom-row {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 220px;
+        height: auto;
+    }
+    
+    .studio-title {
+        font-size: 1.8em;
+    }
+    
+    .main-text {
+        font-size: 1.1em;
+    }
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .about-us {
+        padding: 20px 15px;
+    }
+    
+    .top-row, .bottom-row {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 180px);
+        height: auto;
+    }
+    
+    .studio-title {
+        font-size: 1.8em;
+    }
+    
+    .text-card {
+        padding: 15px;
+    }
+    
+    .main-text {
+        font-size: 1.1em;
+    }
+    
+    .description {
+        font-size: 0.85em;
+    }
+    
+    .cta-button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+        max-width: 200px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .top-row, .bottom-row {
+        grid-template-rows: repeat(3, 150px);
+    }
+    
+    .studio-title {
+        font-size: 1.5em;
+    }
+    
+    .text-card {
+        padding: 12px;
+    }
+}
+
+.about-card.title-card .studio-title {
+    color: #6b2ad3 !important;
+    font-size: 2.2em !important;
+    font-weight: 300 !important;
+    text-align: center !important;
+    margin: 0 !important;
+    letter-spacing: 1.5px !important;
+    text-shadow: none !important; /* Убираем тень */
+}
+
+.title-card {
+    background: white !important;
+    border: 0.8px solid #621ecf;
+}
+
+
+/* Стили для секции "Наши направления" */
+#about-images h2 {
+    text-align: left !important; /* Выравниваем по левому краю */
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+/* Или если у вас есть класс для этой секции */
+.about-images-section h2 {
+    text-align: left !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+

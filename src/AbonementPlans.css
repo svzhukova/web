@@ -1,0 +1,96 @@
+.abonement-section {
+    background-color: #f3ebdd;
+    text-align: center;
+    padding: 80px 20px;
+  }
+  
+  .abonement-title {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    color: #3e3e3e;
+  }
+  
+  .abonement-intro {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 60px;
+    color: #555;
+  }
+  
+  .abonement-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    justify-items: center;
+    margin-bottom: 60px;
+  }
+  
+  .abonement-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 320px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .abonement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.15);
+  }
+  
+  .abonement-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .abonement-card p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  .price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #9a6d44;
+  }
+  
+  .abonement-specials {
+    background-color: #fff8f1;
+    border-radius: 16px;
+    padding: 30px;
+    margin: 0 auto 50px;
+    max-width: 800px;
+  }
+  
+  .abonement-specials h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #3e3e3e;
+  }
+  
+  .abonement-specials ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #555;
+  }
+  
+  .abonement-specials li {
+    margin: 8px 0;
+    font-size: 1.1rem;
+  }
+  
+  .abonement-button-wrapper {
+    text-align: center;
+  }
+  
+
+
+  
+  
