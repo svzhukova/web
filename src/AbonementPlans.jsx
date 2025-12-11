@@ -49,9 +49,8 @@ const AbonementPlans = () => {
       </div>
 
       <div className="abonement-specials">
-        <h3>✨ Специальные предложения</h3>
+        <h3>Специальные предложения</h3>
         <ul>
-          <li>Первое занятие — <strong>бесплатно</strong></li>
           <li>Приведи друга — <strong>скидка 10%</strong> каждому</li>
           <li>Безлимит на 3 месяца — <strong>25 000 ₽</strong> вместо 29 700 ₽</li>
           <li>Утренние занятия (до 11:00) — <strong>-15%</strong></li>

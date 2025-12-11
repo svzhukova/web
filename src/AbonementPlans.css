@@ -1,5 +1,5 @@
 .abonement-section {
-    background-color: #f3ebdd;
+    background-color: #fdfdfd;
     text-align: center;
     padding: 80px 20px;
   }
@@ -56,11 +56,11 @@
   .price {
     font-size: 1.3rem;
     font-weight: bold;
-    color: #9a6d44;
+    color: #8324b7;
   }
   
   .abonement-specials {
-    background-color: #fff8f1;
+    background-color: #eed6f9;
     border-radius: 16px;
     padding: 30px;
     margin: 0 auto 50px;

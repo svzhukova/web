@@ -1,8 +1,7 @@
-/* Abonements.css */
 
 /* Общий фон для всей страницы */
 .abonements-page {
-    background-color: #f3ebdd; /* тот же бежевый, что и в секции */
+    background-color: #ffffff; 
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -72,7 +71,7 @@
     font-size: 16px;
     margin-right: 15px;
     flex-shrink: 0;
-    line-height: 1; /* 👈 чтобы цифра не сдвигалась */
+    line-height: 1; 
   }
   
   

@@ -1018,10 +1018,10 @@ body, #root, main {
 }
 
 
-/* Секция с картинками теперь растягивается и заполняет всё пространство до футера */
+
 .about-page-wrapper .home-images-section {
   flex-grow: 1;
-  background-color: #ebe5d8;
+  background-color: #ead7fc;
   padding-bottom: 0;
   margin-bottom: 0;
 }

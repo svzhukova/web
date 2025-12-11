@@ -1,10 +1,17 @@
 import React from "react";
 import Videoabonements from "./Videoabonements";
 import AbonementPlans from "./AbonementPlans";
-import "./Abonements.css"; // 👈 создадим для стилей этого блока
+import "./Abonements.css";
 import rulesImage from "./rules.jpg";
 
 function Abonements() {
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/abonements")
+      .then(res => res.json())
+      .then(data => setAbonements(data))
+      .catch(err => console.error("Ошибка загрузки:", err));
+  }, []);
+
   return (
     <div className="abonements-page">
       <Videoabonements />
@@ -12,7 +19,6 @@ function Abonements() {
 
       <AbonementPlans />
 
-      {/* 🔥 Новый блок правил */}
       <section className="rules-section">
         <div className="rules-image">
 
