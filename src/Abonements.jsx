@@ -5,12 +5,7 @@ import "./Abonements.css";
 import rulesImage from "./rules.jpg";
 
 function Abonements() {
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/abonements")
-      .then(res => res.json())
-      .then(data => setAbonements(data))
-      .catch(err => console.error("Ошибка загрузки:", err));
-  }, []);
+
 
   return (
     <div className="abonements-page">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { trainers, classTypes, generateSchedule, bookClass, cancelBooking } from './data';
 import './YogaSchedule.css';
+import { bookingAPI } from '../services/api';
 
 const YogaSchedule = () => {
   const [scheduleData, setScheduleData] = useState([]);
@@ -9,6 +10,8 @@ const YogaSchedule = () => {
   const [selectedClass, setSelectedClass] = useState('all');
   const [bookedClasses, setBookedClasses] = useState({});
   const [updatedLessonId, setUpdatedLessonId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Загружаем данные при монтировании
   useEffect(() => {
@@ -21,8 +24,33 @@ const YogaSchedule = () => {
     if (savedBookings) {
       setBookedClasses(JSON.parse(savedBookings));
     }
+    
+    // Дополнительно: загружаем реальные бронирования с сервера
+    loadServerBookings();
   }, []);
-
+  
+  // Функция загрузки бронирований с сервера
+  const loadServerBookings = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    
+    try {
+      const serverBookings = await bookingAPI.getMyBookings();
+      // Создаем маппинг class_id -> true для быстрой проверки
+      const serverBookingMap = {};
+      serverBookings.forEach(booking => {
+        serverBookingMap[booking.class_id] = true;
+      });
+      
+      // Обновляем локальное состояние
+      const updatedBookings = { ...bookedClasses, ...serverBookingMap };
+      setBookedClasses(updatedBookings);
+      localStorage.setItem('yogaBookings', JSON.stringify(updatedBookings));
+    } catch (error) {
+      console.log('Не удалось загрузить бронирования с сервера:', error.message);
+    }
+  };
+    
   // Фильтрация расписания
   useEffect(() => {
     filterSchedule();
@@ -43,44 +71,132 @@ const YogaSchedule = () => {
     setFilteredData(filtered);
   };
 
-  // Функция бронирования
-  const handleBookClass = (lessonId) => {
-    const updatedSchedule = bookClass(scheduleData, lessonId);
-    setScheduleData(updatedSchedule);
+  // Функция бронирования с сохранением на сервер
+  const handleBookClass = async (lesson) => {
+    const token = localStorage.getItem('token');
     
-    // Добавляем в список забронированных
-    const newBookedClasses = {
-      ...bookedClasses,
-      [lessonId]: true
-    };
-    setBookedClasses(newBookedClasses);
-    
-    // Сохраняем в localStorage
-    localStorage.setItem('yogaBookings', JSON.stringify(newBookedClasses));
-    
-    // Анимация обновления
-    setUpdatedLessonId(lessonId);
-    setTimeout(() => setUpdatedLessonId(null), 500);
+    if (!token) {
+      alert('Сначала войдите в систему!');
+      window.location.href = '/account';
+      return;
+    }
+  
+    console.log('🔄 Начинаем запись на занятие:', lesson);
+    console.log('📊 Тип lesson.id:', typeof lesson.id, 'Значение:', lesson.id);
+  
+    try {
+      // ВАЖНО: Преобразуем ID в число
+      const classId = Number(lesson.id);
+      
+      if (isNaN(classId)) {
+        console.error('❌ lesson.id не является числом:', lesson.id);
+        // Если это строка вроде 'geoc2074n', создаем числовой хеш
+        const numericId = createNumericIdFromString(lesson.id);
+        console.log('🔢 Сгенерирован числовой ID:', numericId);
+      }
+      
+      // Подготавливаем данные для отправки
+      const bookingData = {
+        class_id: Number(lesson.id) || createNumericIdFromString(lesson.id), // Преобразуем в число
+        class_name: lesson.class_name,
+        class_time: `${lesson.start_time}-${lesson.end_time}`,
+        class_date: lesson.date,
+        trainer_name: lesson.trainer_name,
+        hall_name: lesson.hall_name
+      };
+      
+      console.log('📤 Данные после преобразования:', bookingData);
+      console.log('📊 Тип class_id:', typeof bookingData.class_id);
+  
+      const result = await bookingAPI.createBooking(bookingData);
+      console.log('✅ Успех! Ответ сервера:', result);
+      
+      // Обновляем локальное состояние
+      const updatedSchedule = scheduleData.map(l => 
+        l.id === lesson.id ? { ...l, free_spots: l.free_spots - 1 } : l
+      );
+      setScheduleData(updatedSchedule);
+      
+      const newBookedClasses = {
+        ...bookedClasses,
+        [lesson.id]: true
+      };
+      setBookedClasses(newBookedClasses);
+      localStorage.setItem('yogaBookings', JSON.stringify(newBookedClasses));
+      
+      setUpdatedLessonId(lesson.id);
+      setTimeout(() => setUpdatedLessonId(null), 500);
+      
+      alert(`✅ Вы успешно записались на занятие!`);
+      
+    } catch (error) {
+      console.error('❌ Ошибка при записи на занятие:', error);
+      
+      // Показываем понятное сообщение об ошибке
+      if (error.message.includes('class_id') && error.message.includes('integer')) {
+        alert(`❌ Ошибка: ID занятия "${lesson.id}" не является числом. Пожалуйста, сообщите администратору.`);
+      } else {
+        alert(`❌ Ошибка: ${error.message}`);
+      }
+    }
+  };
+  
+  // Функция для создания числового ID из строки
+  const createNumericIdFromString = (str) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      hash |= 0; // Convert to 32bit integer
+    }
+    return Math.abs(hash);
   };
 
   // Функция отмены бронирования
-  const handleCancelBooking = (lessonId) => {
-    const updatedSchedule = cancelBooking(scheduleData, lessonId);
-    setScheduleData(updatedSchedule);
+  const handleCancelBooking = async (lessonId, lesson) => {
+    const token = localStorage.getItem('token');
     
-    // Удаляем из списка забронированных
-    const newBookedClasses = { ...bookedClasses };
-    delete newBookedClasses[lessonId];
-    setBookedClasses(newBookedClasses);
-    
-    // Сохраняем в localStorage
-    localStorage.setItem('yogaBookings', JSON.stringify(newBookedClasses));
-    
-    // Анимация обновления
-    setUpdatedLessonId(lessonId);
-    setTimeout(() => setUpdatedLessonId(null), 500);
+    if (!token) {
+      alert('Сначала войдите в систему!');
+      return;
+    }
+  
+    if (!window.confirm('Вы уверены, что хотите отменить запись на это занятие?')) {
+      return;
+    }
+  
+    setIsLoading(true);
+    setErrorMessage('');
+  
+    try {
+      // Вариант 1: Используем cancelBookingByClassId
+      const result = await bookingAPI.cancelBookingByClassId(lessonId);
+      
+      // ИЛИ Вариант 2: Если знаем реальный booking_id
+      // const result = await bookingAPI.cancelBooking(realBookingId);
+      
+      // Локальное обновление
+      const updatedSchedule = scheduleData.map(l => 
+        l.id === lessonId ? { ...l, free_spots: l.free_spots + 1 } : l
+      );
+      setScheduleData(updatedSchedule);
+      
+      const newBookedClasses = { ...bookedClasses };
+      delete newBookedClasses[lessonId];
+      setBookedClasses(newBookedClasses);
+      localStorage.setItem('yogaBookings', JSON.stringify(newBookedClasses));
+      
+      setUpdatedLessonId(lessonId);
+      setTimeout(() => setUpdatedLessonId(null), 500);
+      
+      alert('✅ Запись успешно отменена!');
+      
+    } catch (error) {
+      console.error('Ошибка при отмене записи:', error);
+      setErrorMessage('Не удалось отменить запись. Попробуйте позже.');
+    } finally {
+      setIsLoading(false);
+    }
   };
-
   // Получение занятий для времени и дня
   const getLessonsForTimeAndDay = (startTime, dayOffset) => {
     const targetDate = new Date('2025-10-13');
@@ -154,10 +270,40 @@ const YogaSchedule = () => {
         <p>Забронируйте место на понравившееся занятие</p>
       </div>
 
+      {errorMessage && (
+        <div className="error-message" style={{
+          background: '#f8d7da',
+          color: '#721c24',
+          padding: '10px',
+          borderRadius: '5px',
+          marginBottom: '20px',
+          textAlign: 'center'
+        }}>
+          {errorMessage}
+        </div>
+      )}
+
+      {isLoading && (
+        <div className="loading-overlay" style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          background: 'rgba(255,255,255,0.9)',
+          padding: '20px',
+          borderRadius: '10px',
+          zIndex: 1000,
+          boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+        }}>
+          Обработка запроса...
+        </div>
+      )}
+
       <div className="filters">
         <select 
           value={selectedTrainer} 
           onChange={(e) => setSelectedTrainer(e.target.value)}
+          disabled={isLoading}
         >
           <option value="all">Все тренеры</option>
           {trainers.map(trainer => (
@@ -170,6 +316,7 @@ const YogaSchedule = () => {
         <select 
           value={selectedClass} 
           onChange={(e) => setSelectedClass(e.target.value)}
+          disabled={isLoading}
         >
           <option value="all">Все группы</option>
           {classTypes.map(classType => (
@@ -220,15 +367,16 @@ const YogaSchedule = () => {
                         {!bookedClasses[lesson.id] ? (
                           <button
                             className={buttonClass}
-                            onClick={() => handleBookClass(lesson.id)}
-                            disabled={lesson.free_spots === 0}
+                            onClick={() => handleBookClass(lesson)} // Передаем весь объект lesson
+                            disabled={lesson.free_spots === 0 || isLoading}
                           >
                             {lesson.free_spots === 0 ? 'Мест нет' : 'Записаться'}
                           </button>
                         ) : (
                           <button
                             className="cancel-button"
-                            onClick={() => handleCancelBooking(lesson.id)}
+                            onClick={() => handleCancelBooking(lesson.id, lesson)} // Передаем id и объект
+                            disabled={isLoading}
                           >
                             Отменить запись
                           </button>
@@ -246,6 +394,22 @@ const YogaSchedule = () => {
       {/* Статистика бронирований */}
       <div className="booking-stats">
         <p>Забронировано занятий: {Object.keys(bookedClasses).length}</p>
+        {localStorage.getItem('token') ? (
+          <a href="/profile" style={{ 
+            color: '#7fd381', 
+            textDecoration: 'none', 
+            fontWeight: '500',
+            marginLeft: '20px'
+          }}>
+            Посмотреть мои записи в профиле →
+          </a>
+        ) : (
+          <p style={{ color: '#666', marginTop: '10px' }}>
+            <a href="/account" style={{ color: '#7fd381', textDecoration: 'none' }}>
+              Войдите в систему
+            </a>, чтобы записываться на занятия
+          </p>
+        )}
       </div>
     </div>
   );

@@ -2,6 +2,15 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/web/', // имя репозитория
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://studio-backend-8rnj.onrender.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: false,
+      }
+    }
+  }
 })
