@@ -1,11 +1,11 @@
-const API_URL = import.meta.env.VITE_API_URL || 'https://studio-backend-8rnj.onrender.com';
+const API_URL = 'https://studio-backend-8rnj.onrender.com';
 const token = localStorage.getItem("token");
 
 await fetch(`${API_URL}/bookings`, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`  // ← так правильно
+    "Authorization": `Bearer ${token}`  
   },
   body: JSON.stringify(bookingData)
 });
