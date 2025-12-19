@@ -22,7 +22,7 @@ import image from './image.png';
 
 
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://studio-backend-8rnj.onrender.com';
+const API_URL = 'https://studio-backend-8rnj.onrender.com';
 console.log('🔧 Текущий API_URL:', API_URL);
 
 function Layout({ children }) {
