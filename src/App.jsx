@@ -20,9 +20,10 @@ import aboutImage2 from './about2.png';
 import aboutImage3 from './about3.png';
 import image from './image.png';
 
-const API_URL = import.meta.env.VITE_API_URL || '';
-console.log('🔗 API URL:', API_URL);
 
+
+const API_URL = import.meta.env.VITE_API_URL || 'https://studio-backend-8rnj.onrender.com';
+console.log('🔧 Текущий API_URL:', API_URL);
 
 function Layout({ children }) {
   const location = useLocation();
