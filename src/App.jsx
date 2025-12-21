@@ -410,7 +410,7 @@ function Profile() {
           <button onClick={handleLogout} style={{
             marginTop: '20px',
             padding: "10px 20px",
-            background: "#dc3545",
+            background: "#a255fa",
             color: "white",
             border: "none",
             borderRadius: "5px",
@@ -423,7 +423,7 @@ function Profile() {
 
         {/* Правая колонка - действия */}
         <div style={{ 
-          background: "#f0f7ff", 
+          background: "#f8f0ff", 
           padding: "25px", 
           borderRadius: "10px"
         }}>
