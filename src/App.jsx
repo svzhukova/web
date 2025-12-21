@@ -271,11 +271,9 @@ function Login() {
       console.log("Ответ логина:", data);
       
       if (response.ok) {
-        // Сохраняем токен
         localStorage.setItem("token", data.access_token);
         localStorage.setItem("user", JSON.stringify(data.user));
         alert(`✅ Вход успешен! Добро пожаловать, ${data.user.first_name}!`);
-        // Перенаправить на профиль
         window.location.href = "/profile";
       } else {
         alert(`❌ Ошибка: ${data.detail}`);
